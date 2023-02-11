@@ -1,0 +1,56 @@
+.header {
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #003585;
+  color: white;
+}
+#search-bar {
+  padding-left: 20px;
+  width: 532px;
+  height: 46px;
+  border-radius: 20px 0px 0px 20px;
+  border: none;
+}
+#search-button {
+  width: 132px;
+  height: 47px;
+  border-radius: 0px 20px 20px 0px;
+  background-color: #003585;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.header button:hover {
+  background-color: #eb682f;
+}
+.header button:active {
+  transform: translateY(1px);
+}
+.sign-in {
+  display: flex;
+  gap: 10px;
+}
+.sign-in p {
+  cursor: pointer;
+}
+.header-basket-logo {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+}
+.header-basket-logo p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a7f65c;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
