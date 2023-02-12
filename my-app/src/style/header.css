@@ -35,7 +35,7 @@
 }
 .sign-in {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 .sign-in p {
   cursor: pointer;
@@ -53,4 +53,18 @@
   border-radius: 50%;
   width: 25px;
   height: 25px;
+}
+.logged-in {
+}
+.logged-in span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.logged-in span:hover {
+  color: #eb682f;
+}
+.header-logo {
+  cursor: pointer;
 }

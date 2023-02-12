@@ -2,12 +2,27 @@ import MainLogo from "../subcomponent/MainLogo";
 import "../style/header.css";
 import SignInLogo from "../subcomponent/SignInLogo";
 import BasketLogo from "../subcomponent/BasketLogo";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
+import { UserContext } from "../layout/UserContext";
+import axios from "axios";
+import SignIn from "./SignIn";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const { users, setUsers } = useContext(UserContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    axios.get("http://localhost:2020/users").then((res) => {
+      console.log(res.data);
+      setUsers(res.data);
+    });
+  }, []);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -15,30 +30,53 @@ export default function Header() {
 
   return (
     <div className="header">
-      <MainLogo />
+      <div className="header-logo" onClick={() => navigate("/")}>
+        <MainLogo />
+      </div>
+
       <div className="search-field">
         <input id="search-bar" />
         <button id="search-button">Search</button>
       </div>
       <div className="sign-in">
-        <SignInLogo />
-        <p onClick={handleShow}>Sign In</p>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <ModalLogo />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        {isLoggedIn ? (
+          <div className="logged-in">
+            <p>Hello! {user}</p>
+            <span
+              onClick={() => {
+                setIsLoggedIn(false);
+              }}
+            >
+              Log out
+            </span>
+          </div>
+        ) : (
+          <div>
+            <SignInLogo />
+            <p onClick={handleShow}>Sign In</p>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <ModalLogo />
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <SignIn users={users} />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    navigate("/register");
+                    setShow(false);
+                  }}
+                >
+                  Бүртгүүлэх
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+        )}
       </div>
       <div className="header-basket-logo">
         <BasketLogo />
