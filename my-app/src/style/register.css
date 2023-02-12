@@ -1,0 +1,35 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 450px;
+  border: 1px solid black;
+  border-radius: 10px;
+  border-style: none;
+  box-shadow: 2px 3px 3px 3px rgba(0, 0, 0, 0.51);
+  margin: 20px auto;
+}
+.add-user {
+  margin: 10px auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.add-user input {
+  border-radius: 20px;
+}
+.add-user button {
+  border: none;
+  border-radius: 10px;
+  background-color: #003585;
+  color: #fff;
+}
+.add-user label {
+  width: 40%;
+  color: #003585;
+}

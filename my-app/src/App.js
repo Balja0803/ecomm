@@ -8,6 +8,7 @@ import { UserContext } from "./layout/UserContext";
 import { Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import Main from "./components/Main";
+import "./style/app.css";
 
 function App() {
   const [users, setUsers] = useState([]);
