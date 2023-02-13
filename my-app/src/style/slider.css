@@ -1,0 +1,8 @@
+.slider {
+  width: 100%;
+
+  background-color: grey;
+}
+#carousel-container {
+  border: 1px solid black;
+}

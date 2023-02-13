@@ -18,7 +18,7 @@ export default function Header() {
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     axios.get("http://localhost:2020/users").then((res) => {
-      console.log(res.data);
+      console.log("users:", res.data);
       setUsers(res.data);
     });
   }, []);

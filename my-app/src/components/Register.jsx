@@ -13,8 +13,10 @@ import {
   Modal,
 } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const unique_id = uuid();
   const small_id = unique_id.slice(0, 8);
   const [id, setId] = useState("");
@@ -33,24 +35,24 @@ export default function Register() {
     setData({ ...data, [e.target.name]: e.target.value });
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     setId(small_id);
     setData((data.id = `${id ? id : small_id}`));
 
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:2020/users/add",
-    //     data
-    //   );
-    //   if (response.status === 200) {
-    //     setShowModal(true);
-    //   }
-    // } catch (error) {}
-    axios.post("http://localhost:2020/users/add", data);
+    try {
+      const response = await axios.post(
+        "http://localhost:2020/users/add",
+        data
+      );
+      if (response.status === 200) {
+        setShowModal(true);
+      }
+    } catch (error) {}
+    // axios.post("http://localhost:2020/users/add", data);
     console.log("user data:", data);
     setShow(true);
-    setShowModal(true);
+    // setShowModal(true);
     setData({
       username: "",
       email: "",
@@ -79,7 +81,7 @@ export default function Register() {
         />
         <button type="submit">Create Account!</button>
       </form>
-      {showModal && (
+      {showModal ? (
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
@@ -91,12 +93,12 @@ export default function Register() {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={() => navigate("/")}>
               Sign in!
             </Button>
           </Modal.Footer>
         </Modal>
-      )}
+      ) : null}
     </div>
   );
 }
