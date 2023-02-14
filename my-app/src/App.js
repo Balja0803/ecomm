@@ -19,17 +19,15 @@ function App() {
 
   return (
     <div className="app">
-      <ProductContext.Provider value={{ products, setProducts }}>
-        <UserContext.Provider
-          value={{ users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser }}
-        >
-          <Header />
-          <Routes>
-            <Route path="/register" element={<Register />} />
-            <Route path="/" element={<Main />} />
-          </Routes>
-        </UserContext.Provider>
-      </ProductContext.Provider>
+      <UserContext.Provider
+        value={{ users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser }}
+      >
+        <Header />
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

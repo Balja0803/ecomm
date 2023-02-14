@@ -10,6 +10,7 @@ import { UserContext } from "../layout/UserContext";
 import axios from "axios";
 import SignIn from "./SignIn";
 import { useNavigate } from "react-router-dom";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -27,6 +28,10 @@ export default function Header() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [showBasket, setShowBasket] = useState(false);
+  const basketCloseHandler = () => setShowBasket(false);
+  const basketShowHandler = () => setShowBasket(true);
 
   return (
     <div className="header">
@@ -79,7 +84,20 @@ export default function Header() {
         )}
       </div>
       <div className="header-basket-logo">
-        <BasketLogo />
+        <Button variant="primary" onClick={basketShowHandler}>
+          <BasketLogo />
+        </Button>
+        <Offcanvas
+          show={showBasket}
+          onHide={basketCloseHandler}
+          placement="end"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Basket</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>Basket list</Offcanvas.Body>
+        </Offcanvas>
+
         <p>0</p>
       </div>
     </div>
