@@ -3,12 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { UserContext } from "../layout/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../layout/UserContext";
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const { users, setUsers } = useContext(UserContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
-  const { user, setUser } = useContext(UserContext);
+  const { users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser } =
+    useUserContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

@@ -12,22 +12,13 @@ import { ProductContext } from "./layout/ProductContext";
 import "./style/app.css";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState();
-  const [products, setProducts] = useState([]);
-
   return (
     <div className="app">
-      <UserContext.Provider
-        value={{ users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser }}
-      >
-        <Header />
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Main />} />
-        </Routes>
-      </UserContext.Provider>
+      <Header />
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Main />} />
+      </Routes>
     </div>
   );
 }

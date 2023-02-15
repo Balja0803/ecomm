@@ -3,17 +3,10 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import React from "react";
 import "../style/register.css";
-import {
-  Col,
-  Button,
-  Row,
-  Container,
-  Card,
-  Form,
-  Modal,
-} from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
 import { useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -28,9 +21,14 @@ export default function Register() {
   });
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
+  const alertClose = () => showAlert(false);
+  const alertShow = () => showAlert(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   function updateData(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
@@ -41,17 +39,21 @@ export default function Register() {
     setData((data.id = `${id ? id : small_id}`));
 
     try {
-      const response = await axios.post(
-        "http://localhost:2020/users/add",
-        data
-      );
-      if (response.status === 200) {
-        setShowModal(true);
-      }
-    } catch (error) {}
+      const response = await axios
+        .post("http://localhost:2020/users/add", data)
+        .then((res) => {
+          setShowModal(true);
+          setShow(true);
+          console.log("test");
+        });
+    } catch (error) {
+      setAlert(true);
+      setShowAlert(true);
+      console.log("409");
+    }
     // axios.post("http://localhost:2020/users/add", data);
     console.log("user data:", data);
-    setShow(true);
+
     // setShowModal(true);
     setData({
       username: "",
@@ -95,6 +97,21 @@ export default function Register() {
             </Button>
             <Button variant="primary" onClick={() => navigate("/")}>
               Sign in!
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      ) : null}
+      {alert ? (
+        <Modal show={showAlert} onHide={alertClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <ModalLogo />
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Username already exists!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={alertClose}>
+              Close
             </Button>
           </Modal.Footer>
         </Modal>

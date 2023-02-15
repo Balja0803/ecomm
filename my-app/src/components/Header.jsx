@@ -6,7 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
-import { UserContext } from "../layout/UserContext";
+import { UserContext, useUserContext } from "../layout/UserContext";
 import axios from "axios";
 import SignIn from "./SignIn";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { users, setUsers } = useContext(UserContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
-  const { user, setUser } = useContext(UserContext);
+  const { users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser } =
+    useUserContext();
+  // const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     axios.get("http://localhost:2020/users").then((res) => {
       console.log("users:", res.data);
