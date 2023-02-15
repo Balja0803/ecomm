@@ -11,6 +11,8 @@ import axios from "axios";
 import SignIn from "./SignIn";
 import { useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -47,14 +49,19 @@ export default function Header() {
       <div className="sign-in">
         {isLoggedIn ? (
           <div className="logged-in">
-            <p>Hello! {user}</p>
-            <span
-              onClick={() => {
-                setIsLoggedIn(false);
-              }}
-            >
-              Log out
-            </span>
+            <p>Welcome</p>
+            <DropdownButton id="dropdown-basic-button" title={user}>
+              <Dropdown.Item href="#/action-1">action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-3"
+                onClick={() => {
+                  setIsLoggedIn(false);
+                }}
+              >
+                Logout
+              </Dropdown.Item>
+            </DropdownButton>
           </div>
         ) : (
           <div>

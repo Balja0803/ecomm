@@ -56,6 +56,10 @@
   height: 25px;
 }
 .logged-in {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 .logged-in span {
   display: flex;

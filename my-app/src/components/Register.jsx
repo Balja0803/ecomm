@@ -24,8 +24,8 @@ export default function Register() {
   const [alert, setAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const alertClose = () => showAlert(false);
-  const alertShow = () => showAlert(true);
+  const alertClose = () => setShowAlert(false);
+  const alertShow = () => setShowAlert(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
