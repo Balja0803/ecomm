@@ -6,7 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
-import { UserContext, useUserContext } from "../layout/UserContext";
+import { useUserContext } from "../layout/UserContext";
 import axios from "axios";
 import SignIn from "./SignIn";
 import { useNavigate } from "react-router-dom";
