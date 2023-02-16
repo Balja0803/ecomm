@@ -8,28 +8,14 @@ import { useUserContext } from "../layout/UserContext";
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const { users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser } =
-    useUserContext();
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const { setIsLoggedIn, setUser } = useUserContext();
+
   const [fail, setFail] = useState(false);
   const [data, setData] = useState({
     username: "",
     password: "",
   });
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const isValid = users.some(
-  //     (user) => user.username === username && user.password === password
-  //   );
-  //   if (isValid) {
-  //     setIsLoggedIn(true);
-  //     setUser(username);
-  //     navigate("/");
-  //   } else {
-  //     console.log("username password wrong");
-  //   }
-  // }
+
   function updateData(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
@@ -39,7 +25,8 @@ export default function SignIn() {
       const response = await axios
         .post("http://localhost:2020/users/login", data)
         .then((res) => {
-          setIsLoggedIn(true);
+          console.log(res.data.success);
+          res.data.success && setIsLoggedIn(true);
           setUser(data.username);
           navigate("/");
         });
