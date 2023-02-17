@@ -28,7 +28,14 @@ export default function Products() {
       </div>
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         {products.map((product, index) => (
-          <ProductCard product={product} key={index} />
+          <div
+            key={index}
+            onClick={() => {
+              console.log("clicked");
+            }}
+          >
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
     </div>
