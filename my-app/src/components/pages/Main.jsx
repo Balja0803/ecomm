@@ -2,7 +2,7 @@ import Products from "../Products";
 import Slider from "../Slider";
 import { Route, Routes } from "react-router-dom";
 import Product from "../ProductCard";
-import { Navigate } from "react-router-dom";
+
 export default function Main() {
   return (
     <div>
