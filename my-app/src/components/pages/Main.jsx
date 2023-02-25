@@ -1,7 +1,7 @@
-import Products from "../Products";
+import Product from "../Product";
 import Slider from "../Slider";
 import { Route, Routes } from "react-router-dom";
-import Product from "../ProductCard";
+import Products from "../Products";
 
 export default function Main() {
   return (

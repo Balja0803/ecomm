@@ -8,9 +8,13 @@ export const useProductContext = () => {
 
 export default function ProductContext({ children }) {
   const [products, setProducts] = useState([]);
+  const [prodId, setProdId] = useState();
+  console.log(prodId);
 
   return (
-    <AllProductContext.Provider value={{ products, setProducts }}>
+    <AllProductContext.Provider
+      value={{ products, setProducts, prodId, setProdId }}
+    >
       {children}
     </AllProductContext.Provider>
   );

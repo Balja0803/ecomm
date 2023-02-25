@@ -2,12 +2,12 @@ import MainLogo from "../subcomponent/MainLogo";
 import "../style/header.css";
 import SignInLogo from "../subcomponent/SignInLogo";
 import BasketLogo from "../subcomponent/BasketLogo";
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
 import { useUserContext } from "../layout/UserContext";
-import axios from "axios";
+
 import SignIn from "./SignIn";
 import { useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -16,16 +16,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { users, setUsers, isLoggedIn, setIsLoggedIn, user, setUser } =
-    useUserContext();
-  // const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
-  // const { user, setUser } = useContext(UserContext);
-  useEffect(() => {
-    axios.get("http://localhost:2020/users").then((res) => {
-      console.log("users:", res.data);
-      setUsers(res.data);
-    });
-  }, []);
+  const { users, setUsers, isLoggedIn, setIsLoggedIn, user } = useUserContext();
 
   const [show, setShow] = useState(false);
 

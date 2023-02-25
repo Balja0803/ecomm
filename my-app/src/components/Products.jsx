@@ -3,9 +3,11 @@ import { useAxios } from "./hooks/useAxios";
 import { useEffect } from "react";
 import { useProductContext } from "../layout/ProductContext";
 import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Products() {
-  const { products, setProducts } = useProductContext();
+  const navigate = useNavigate();
+  const { products, setProducts, setProdId } = useProductContext();
   const { response, loading, error } = useAxios({
     method: "GET",
     url: "http://localhost:2020/products",
@@ -31,7 +33,9 @@ export default function Products() {
           <div
             key={index}
             onClick={() => {
-              console.log("clicked");
+              console.log(product.id);
+              setProdId(product.id);
+              navigate("/products/:id");
             }}
           >
             <ProductCard product={product} />

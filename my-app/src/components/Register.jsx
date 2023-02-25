@@ -6,7 +6,6 @@ import "../style/register.css";
 import { Button, Modal } from "react-bootstrap";
 import ModalLogo from "../subcomponent/ModalLogo";
 import { useNavigate } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
 
 export default function Register() {
   const navigate = useNavigate();

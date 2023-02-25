@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import BasketLogo from "../subcomponent/BasketLogo";
 
-export default function Product({ product }) {
+export default function ProductCard({ product }) {
   return (
     <Card border="primary" style={{ width: "250px", height: " 300px" }}>
       <Card.Img
