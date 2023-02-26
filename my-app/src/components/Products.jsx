@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Products() {
   const navigate = useNavigate();
-  const { products, setProducts, setProdId } = useProductContext();
+  const { products, setProducts } = useProductContext();
   const { response, loading, error } = useAxios({
     method: "GET",
     url: "http://localhost:2020/products",
@@ -33,9 +33,7 @@ export default function Products() {
           <div
             key={index}
             onClick={() => {
-              console.log(product.id);
-              setProdId(product.id);
-              navigate("/products/:id");
+              navigate(`/products/${product.id}`);
             }}
           >
             <ProductCard product={product} />

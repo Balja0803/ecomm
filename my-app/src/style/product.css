@@ -1,0 +1,38 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+}
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.quantity {
+  display: flex;
+}
+.product-image {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main-image {
+  width: 647px;
+  height: 561px;
+  border-radius: 25px;
+}
+.side-images {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-radius: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.buttons p {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: aqua;
+  margin: 10px;
+}
