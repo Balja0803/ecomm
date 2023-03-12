@@ -1,4 +1,6 @@
 .product {
+  max-width: 1280px;
+  margin: 25px auto;
   display: flex;
   justify-content: space-between;
 }
@@ -9,16 +11,20 @@
 }
 .quantity {
   display: flex;
+  align-items: center;
+}
+.quantity p {
+  margin: 0;
 }
 .product-image {
+  margin: 0;
+  width: 45%;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 .main-image {
-  width: 647px;
-  height: 561px;
-  border-radius: 25px;
+  margin: 0;
 }
 .side-images {
   display: flex;
@@ -29,10 +35,21 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 .buttons p {
   border: 1px solid black;
   border-radius: 10px;
   background-color: aqua;
   margin: 10px;
+  padding: 5px;
+}
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+button {
+  margin: 0 auto;
+  border-radius: 5px;
 }

@@ -1,4 +1,3 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import BasketLogo from "../subcomponent/BasketLogo";
 
@@ -13,7 +12,7 @@ export default function ProductCard({ product }) {
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>{product.price}$</Card.Text>
-        <Button variant="primary">цааш үзэх</Button>
+
         <BasketLogo />
       </Card.Body>
     </Card>

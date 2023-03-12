@@ -6,16 +6,19 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from "./App";
 import ProductContext from "./layout/ProductContext";
 import UserContext from "./layout/UserContext";
+import BasketContext from "./layout/BasketContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <UserContext>
-      <ProductContext>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </ProductContext>
-    </UserContext>
+    <BasketContext>
+      <UserContext>
+        <ProductContext>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </ProductContext>
+      </UserContext>
+    </BasketContext>
   </BrowserRouter>
 );
