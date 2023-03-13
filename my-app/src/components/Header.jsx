@@ -13,13 +13,11 @@ import { useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { useBasketContext } from "../layout/BasketContext";
 import BasketList from "./BasketList";
 
 export default function Header() {
   const navigate = useNavigate();
   const { users, isLoggedIn, setIsLoggedIn, user } = useUserContext();
-  const { basket } = useBasketContext();
 
   const [show, setShow] = useState(false);
 
@@ -99,17 +97,11 @@ export default function Header() {
           </Offcanvas.Header>
           <Offcanvas.Body>Basket list</Offcanvas.Body>
           <Offcanvas.Body>
-            <p>
-              {basket.map((item, index) => (
-                <div key={index}>
-                  <BasketList item={item} />
-                </div>
-              ))}
-            </p>
+            <BasketList />
           </Offcanvas.Body>
         </Offcanvas>
 
-        <p>{basket ? basket.length : 0}</p>
+        <p>0</p>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ export default function Product() {
   }, [response, setProducts]);
   const product = products.find((product) => product.id === id);
   const basketHandler = () => {
-    setBasket({ id: product.id, prodQuantity: quantity });
+    localStorage.setItem([product.id, quantity]);
   };
   return (
     <>
