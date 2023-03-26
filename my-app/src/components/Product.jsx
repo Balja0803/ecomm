@@ -7,18 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { useBasketContext } from "../layout/BasketContext";
 
 export default function Product() {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const { id } = useParams();
   const { products, setProducts } = useProductContext();
   const { setBasket } = useBasketContext();
   const { response } = useAxios({
     method: "GET",
-    url: "http://localhost:2020/products",
+    url: "http://localhost:2323/products",
   });
 
   const quantityHandlerInc = () => {
-    setQuantity((c) => c + 1);
+    if (quantity < product.stock) {
+      setQuantity((c) => c + 1);
+    }
   };
   const quantityHandlerDec = () => {
     setQuantity((c) => Math.max(c - 1, 0));
@@ -26,23 +28,25 @@ export default function Product() {
   useEffect(() => {
     response && setProducts(response);
   }, [response, setProducts]);
-  const product = products.find((product) => product.id === id);
+
+  const product = products.find((product) => product._id === id);
+
   const basketHandler = () => {
-    setBasket({ id: product.id, prodQuantity: quantity });
+    setBasket({ id: product._id, prodQuantity: quantity });
   };
   return (
     <>
       <div className="product">
         <div className="product-image">
           <div className="main-image">
-            <img src={product.image} alt="" />
+            <img src={product.image[0]} alt="" />
           </div>
           <div className="side-images">
             <div className="side-image1">
-              <img src={product.image} alt="" />
+              <img src={product.image[1]} alt="" />
             </div>
             <div className="side-image2">
-              <img src={product.image} alt="" />
+              <img src={product.image[2]} alt="" />
             </div>
           </div>
         </div>
@@ -50,7 +54,7 @@ export default function Product() {
           <div className="general-detail">
             <h2>{product.name}</h2>
             <p> price: ${product.price}</p>
-            <p>{product.sale !== 0 ? `Sale: ${product.sale}% off` : null}</p>
+            <p>{product.sale !== null ? `Sale: ${product.sale}% off` : null}</p>
             <p>availablity:</p>
             <p>
               {product.stock !== 0
@@ -72,9 +76,9 @@ export default function Product() {
           </div>
           <div className="product-specs">
             <p>{product.description}</p>
-            {product.spec.map((specs, index) => (
+            {product.specs.map((spec, index) => (
               <p key={index}>
-                {Object.keys(specs)} : {Object.values(specs)}
+                {spec.key} : {spec.value}
               </p>
             ))}
           </div>

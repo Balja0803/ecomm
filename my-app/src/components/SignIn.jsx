@@ -12,7 +12,7 @@ export default function SignIn() {
 
   const [fail, setFail] = useState(false);
   const [data, setData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -22,14 +22,21 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios
-        .post("http://localhost:2020/users/login", data)
-        .then((res) => {
-          console.log(res.data.success);
-          res.data.success && setIsLoggedIn(true);
-          setUser(data.username);
+      const response = await axios.post(
+        "http://localhost:2323/users/login",
+        data
+      );
+      console.log(response);
+      if (response.data.success) {
+        const userToken = response.data.token;
+        localStorage.clear();
+        localStorage.setItem("user_token", userToken);
+        setUser(response.data.data.username);
+        setIsLoggedIn(true);
+        setTimeout(() => {
           navigate("/");
-        });
+        }, 1000);
+      }
     } catch (error) {
       setFail(true);
     }
@@ -39,12 +46,12 @@ export default function SignIn() {
     <div>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
-            placeholder="username"
-            name="username"
-            value={data.username}
+            placeholder="email"
+            name="email"
+            value={data.email}
             onChange={updateData}
           />
         </Form.Group>

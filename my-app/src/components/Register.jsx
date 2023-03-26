@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
+
 import React from "react";
 import "../style/register.css";
 import { Button, Modal } from "react-bootstrap";
@@ -9,14 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
-  const unique_id = uuid();
-  const small_id = unique_id.slice(0, 8);
-  const [id, setId] = useState("");
+
   const [data, setData] = useState({
     username: "",
     password: "",
     email: "",
-    id: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
@@ -34,33 +31,23 @@ export default function Register() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setId(small_id);
-    setData((data.id = `${id ? id : small_id}`));
 
     try {
-      const response = await axios
-        .post("http://localhost:2020/users/add", data)
-        .then((res) => {
-          setShowModal(true);
-          setShow(true);
-          console.log("test");
-        });
+      const response = await axios.post(
+        "http://localhost:2323/users/register",
+        data
+      );
+      console.log(response.data);
     } catch (error) {
-      setAlert(true);
-      setShowAlert(true);
       console.log("409");
     }
-    // axios.post("http://localhost:2020/users/add", data);
     console.log("user data:", data);
 
-    // setShowModal(true);
     setData({
       username: "",
       email: "",
       password: "",
-      id: "",
     });
-    setId("");
   };
 
   return (
@@ -107,7 +94,7 @@ export default function Register() {
               <ModalLogo />
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>Username already exists!</Modal.Body>
+          <Modal.Body>Username or email already exists!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={alertClose}>
               Close
