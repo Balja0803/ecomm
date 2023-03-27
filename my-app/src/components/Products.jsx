@@ -21,13 +21,15 @@ export default function Products() {
       setCategories(res.data);
     });
   }, [response]);
-  const filterCategory = (curCat) => {
+  const filterCategory = async (curCat) => {
     console.log(curCat);
     const selectedCat = products.filter(
       (product) => product.category._id === curCat
     );
     console.log(selectedCat);
-    setProducts(selectedCat);
+    const result = await axios.get(`http://localhost:2323/products/${curCat}`);
+    console.log("filtered", result.data);
+    setProducts(result.data);
   };
 
   return (
