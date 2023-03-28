@@ -5,6 +5,7 @@ import { useProductContext } from "../layout/ProductContext";
 import ProductCard from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Pagination from "../subcomponent/Pagination";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -31,11 +32,18 @@ export default function Products() {
     console.log("filtered", result.data);
     setProducts(result.data);
   };
+  const setAllProducts = async () => {
+    axios
+      .get("http://localhost:2323/products")
+      .then((res) => setProducts(res.data));
+  };
 
   return (
     <div className="products">
       <div className="products-title">
-        <h3>Popular products</h3>
+        <h3 className="allProducts" onClick={() => setAllProducts(products)}>
+          Popular products
+        </h3>
         <ul className="product-filter">
           {categories &&
             categories.map((category, i) => (
@@ -57,6 +65,7 @@ export default function Products() {
           </div>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 }
