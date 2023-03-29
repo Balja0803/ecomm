@@ -11,17 +11,17 @@ export default function Products() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState();
   const { products, setProducts } = useProductContext();
-  const { response, loading, error } = useAxios({
-    method: "GET",
-    url: "http://localhost:2323/products",
-  });
-  useEffect(() => {
-    response && setProducts(response);
-    console.log(response);
-    axios.get("http://localhost:2323/categories").then((res) => {
-      setCategories(res.data);
-    });
-  }, [response]);
+  // const { response, loading, error } = useAxios({
+  //   method: "GET",
+  //   url: "http://localhost:2323/products",
+  // });
+  // useEffect(() => {
+  //   response && setProducts(response);
+  //   console.log(response);
+  //   axios.get("http://localhost:2323/categories").then((res) => {
+  //     setCategories(res.data);
+  //   });
+  // }, [response]);
   const filterCategory = async (curCat) => {
     console.log(curCat);
     const selectedCat = products.filter(
