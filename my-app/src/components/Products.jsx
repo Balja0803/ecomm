@@ -15,13 +15,11 @@ export default function Products() {
   //   method: "GET",
   //   url: "http://localhost:2323/products",
   // });
-  // useEffect(() => {
-  //   response && setProducts(response);
-  //   console.log(response);
-  //   axios.get("http://localhost:2323/categories").then((res) => {
-  //     setCategories(res.data);
-  //   });
-  // }, [response]);
+  useEffect(() => {
+    axios.get("http://localhost:2323/categories").then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
   const filterCategory = async (curCat) => {
     console.log(curCat);
     const selectedCat = products.filter(
@@ -34,8 +32,8 @@ export default function Products() {
   };
   const setAllProducts = async () => {
     axios
-      .get("http://localhost:2323/products")
-      .then((res) => setProducts(res.data));
+      .get("http://localhost:2323/products?page=1")
+      .then((res) => setProducts(res.data.list));
   };
 
   return (

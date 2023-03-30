@@ -10,12 +10,12 @@ export default function Product() {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { products, setProducts } = useProductContext();
+  const { products } = useProductContext();
   const { setBasket } = useBasketContext();
-  const { response } = useAxios({
-    method: "GET",
-    url: "http://localhost:2323/products",
-  });
+  // const { response } = useAxios({
+  //   method: "GET",
+  //   url: "http://localhost:2323/products",
+  // });
 
   const quantityHandlerInc = () => {
     if (quantity < product.stock) {
@@ -25,9 +25,9 @@ export default function Product() {
   const quantityHandlerDec = () => {
     setQuantity((c) => Math.max(c - 1, 0));
   };
-  useEffect(() => {
-    response && setProducts(response);
-  }, [response, setProducts]);
+  // useEffect(() => {
+  //   response && setProducts(response);
+  // }, [response, setProducts]);
 
   const product = products.find((product) => product._id === id);
 

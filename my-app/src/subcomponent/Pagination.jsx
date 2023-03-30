@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useProductContext } from "../layout/ProductContext";
+import "../style/pagination.css";
 
 export default function Pagination() {
+  const { setProducts } = useProductContext();
   const [page, setPage] = useState(1);
 
   const [pageCount, setPageCount] = useState();
@@ -24,18 +27,21 @@ export default function Pagination() {
       const result = await axios.get(
         `http://localhost:2323/products?page=${page}`
       );
-      // setPage(result.data);
+
+      setPageCount(result.data.pages);
+      setProducts(result.data.list);
     };
     getPage();
   }, [page]);
 
   return (
-    <div>
+    <div className="pagination">
       <button disabled={page === 1} onClick={handlePrevious}>
         prev
       </button>
       <button>{page}</button>
-      <button disabled={page === pageCount} onClick={handleNext}>
+
+      <button disabled={page === pageCount - 1} onClick={handleNext}>
         next
       </button>
     </div>
